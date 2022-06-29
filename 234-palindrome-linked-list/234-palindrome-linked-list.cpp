@@ -15,29 +15,39 @@ public:
         if(head->next==NULL)
             return true;
         
-        stack<int>s;
+        ListNode* fast = head;
+        ListNode* slow = head;
         
-        ListNode* ptr = head;
-        ListNode* temp = head;
-        
-        while(ptr)
+        while(fast!=NULL && fast->next!=NULL)
         {
-            s.push(ptr->val);
-            ptr = ptr->next;
+            slow = slow->next;
+            fast = fast->next->next;
         }
         
-        while(temp)
+        ListNode* prev = NULL;
+        ListNode* nxt = NULL;
+        
+        ListNode* head2 = NULL;
+        
+        while(slow!=NULL)
         {
-            int top = s.top();
-            s.pop();
-            
-            if(temp->val!=top)
+            nxt = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = nxt;
+        }
+        
+        head2 = prev;
+        
+        while(head<head2)
+        {
+            if(head->val!=head2->val)
                 return false;
             
-            temp = temp->next;
+            head = head->next;
+            head2 = head2->next;
         }
         
-        return true;;
-        
+        return true;
     }
 };

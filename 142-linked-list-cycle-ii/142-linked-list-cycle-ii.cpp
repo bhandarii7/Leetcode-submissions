@@ -11,6 +11,9 @@ public:
     ListNode *detectCycle(ListNode *head) {
         map<ListNode*,int>m;
         
+        if(head==NULL)
+            return NULL;
+        
         ListNode* loop = head;
         
         while(loop)

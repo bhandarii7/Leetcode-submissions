@@ -1,12 +1,15 @@
 class Solution {
 public:
     bool isPowerOfTwo(int n) {
-        for(int i=0;i<=round(float(sqrt(n)));i++)
-        {
-            if(n==pow(2,i))
-                return true;
-        }
+        if(n<=0)
+            return false;
         
-        return false;
+        if(n==1)
+            return true;
+        
+        if(n%2!=0)
+            return false;
+        
+        return isPowerOfTwo(n/2);
     }
 };

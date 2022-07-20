@@ -1,24 +1,22 @@
 class Solution {
 public:
     
-    void func(vector<int>ds,vector<vector<int>>&ans,vector<int>& nums,vector<int>vis)
+    void func(int ind,int n,vector<int>ds,vector<vector<int>>&ans,vector<int>& nums)
     {
-        if(nums.size()==ds.size())
+        if(ind==n)
         {
             ans.push_back(ds);
             return;
         }
         
-        for(int i=0;i<nums.size();i++)
+        for(int j=ind;j<n;j++)
         {
-            if(vis[i]==0)
-            {
-                ds.push_back(nums[i]);
-                vis[i] = 1;
-                func(ds,ans,nums,vis);
-                ds.pop_back();
-                vis[i] = 0;
-            }
+            swap(nums[ind],nums[j]);
+            ds.push_back(nums[ind]);
+            
+            func(ind+1,n,ds,ans,nums);
+            swap(nums[ind],nums[j]);
+            ds.pop_back();
         }
     }
     
@@ -26,9 +24,7 @@ public:
         vector<vector<int>>ans;
         vector<int>ds;
         int n = nums.size();
-        vector<int>vis(n,0);
-        
-        func(ds,ans,nums,vis);
+        func(0,n,ds,ans,nums);
         
         return ans;
     }

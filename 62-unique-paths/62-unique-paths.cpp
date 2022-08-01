@@ -18,22 +18,27 @@ public:
     int uniquePaths(int m, int n) {
         vector<vector<double>>dp(m+1,vector<double>(n+1,0));
         
-        for(int i = 0;i<=m;i++)
-            dp[i][0] = 1;
+        // for(int i = 0;i<=m;i++)
+        //     dp[i][0] = 1;
         
-        for(int j=0;j<=n;j++) dp[0][j] = 1;
+        // for(int j=0;j<=n;j++) dp[0][j] = 1;
+        
+        vector<double>curr(n+1,1) , prev(n+1,0);
+        
         
         for(int i=1;i<=m;i++)
         {
             for(int j=1;j<=n;j++)
             {
-                double left = dp[i][j-1];
-                double up = dp[i-1][j];
+                double left = curr[j-1];
+                double up = prev[j];
                 
-                dp[i][j] = left+up;
+                curr[j] = left+up;
             }
+            
+            prev = curr;
         }
         // return fn(m-1,n-1,dp);
-        return  (int)dp[m-1][n-1];
+        return  (int)prev[n-1];
     }
 };

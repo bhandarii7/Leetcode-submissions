@@ -4,7 +4,6 @@ public:
         int st = 0;
         int end = nums.size()-1;
         
-        int ans =0;
         
             while(st<end)
             {

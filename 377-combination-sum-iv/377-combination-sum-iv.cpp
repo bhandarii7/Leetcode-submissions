@@ -18,10 +18,27 @@ public:
         
         return dp[tar] =  total;
     }
-    int combinationSum4(vector<int>& nums, int target) {
+    int combinationSum4(vector<int>& a, int target) {
         
-        int n = nums.size();
-        vector<int>dp(target+1,-1);
-        return fn(target,n,nums,dp);
+        int n = a.size();
+        vector<double>dp(target+1,0);
+        
+        dp[0] = 1;
+        
+        int total = 0;
+        for(int i=1;i<=target;i++)
+        {
+                 double total = 0;
+            for(int j=0;j<n;j++)
+            {
+                if(i>= a[j])
+                total+= dp[i-a[j]];
+            }
+        
+            dp[i] =  total;
+        }
+        // return fn(target,n,a,dp);
+        
+        return (int)dp[target];
     }
 };
